@@ -1,25 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import Nav from "./Nav";
+import Map from "./Map";
+import GuestMessage from "./Map";
+import LocationSelector from "./Map";
+import {Container, Typography} from "@mui/material";
+import MessageTemplateEditor from "./MessageTemplateEditor";
+import InvitePageConfirm from "./InvitePageConfirm";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Nav/>
+
+        // <Nav/>
+        // <Container>
+        //   <Typography variant="h4" gutterBottom>
+        //     Location Selector
+        //   </Typography>
+        //   <LocationSelector />
+        // </Container>
+    );
 }
 
 export default App;
