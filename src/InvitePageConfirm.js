@@ -12,11 +12,12 @@ import {
     Box
 } from '@mui/material';
 import {useParams} from "react-router-dom";
+import axios from "axios";
 
 const InvitePageConfirm = () => {
     const { id } = useParams();
     const [response, setResponse] = useState('');
-    const [numPeople, setNumPeople] = useState('');
+    const [numPeople, setNumPeople] = useState(null);
     const [showNumPeopleInput, setShowNumPeopleInput] = useState(false);
     const [message, setMessage] = useState('');
 
@@ -35,6 +36,21 @@ const InvitePageConfirm = () => {
             setMessage('Please return to this link to set your answer later.');
         }
     };
+    const change = ()=>{
+        const res= axios.get(`http://localhost:8080/users/invite/update-invite-response?id=${id}&arrivedType=${getTypeIntByString()}&numberOfInvited=${numPeople}`);
+        console.log(res.data);
+    }
+    const getTypeIntByString = ()=>{
+        if (response=="yes"){
+            return 1;
+        }
+        if (response=="no"){
+            return 2;
+        }
+        if(response=="maybe"){
+            return 3;
+        }
+    }
 
     const handleNumPeopleChange = (event) => {
         setNumPeople(event.target.value);
@@ -76,11 +92,11 @@ const InvitePageConfirm = () => {
                             margin="normal"
                             inputProps={{ min: "1" }}
                         />
-                        <Button variant="contained" color="primary" type="submit">
-                            Submit
-                        </Button>
                     </form>
                 )}
+                <Button onClick={change} variant="contained" color="primary" type="submit">
+                    Submit
+                </Button>
 
                 {message && (
                     <Box mt={3}>
